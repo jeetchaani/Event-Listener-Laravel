@@ -1,6 +1,7 @@
 <h3>Event Listener In Laravel</h3>
 1) Create Route and Controller -> RegisterController
 2) Create the event class -> php artisan make:event SendEmail
+
 <code>
      public $userId;
 
@@ -9,7 +10,9 @@
         $this->userId = $userId;
     }
 </code>
-3) Create the event listener -> php artisan make:listener SendEmailListen --event=SendEmail 
+
+3) Create the event listener -> php artisan make:listener SendEmailListen --event=SendEmail
+   
 <code>
      public function handle(SendMail $event): void
     {
@@ -21,14 +24,18 @@
         } );
     }
 </code>
+
 and apply mail function in this listner
-4)  Register the event and listener into **app/Providers/EventServiceProvider.php**
+5)  Register the event and listener into **app/Providers/EventServiceProvider.php**
+
 <code>
      SendMail::class =>[
             SendMailListen::class, 
         ],
 </code>
-5)  Trigger the event in Controller
+
+6)  Trigger the event in Controller
+   
 <code>
      event(new SendMail($user->id));
 </code>
